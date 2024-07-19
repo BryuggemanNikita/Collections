@@ -6,7 +6,7 @@ import { NodeM } from "./Node";
     constructor(originKey:number, originValue){
         this.origin = new NodeM(originKey, originValue);
     };
-
+    
     public getOrigin():NodeM{
         return this.origin;
     }
