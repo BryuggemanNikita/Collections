@@ -1,15 +1,15 @@
-import { NodeM } from "./Node";
+import { NodeT } from "./Node";
 
 // Binary tree. implementation of containing nodes
  export class BinaryTree{
-    private origin:NodeM;
+    private origin:NodeT;
 
     constructor(originKey:number, originValue){
-        this.origin = new NodeM(originKey, originValue);
+        this.origin = new NodeT(originKey, originValue);
     };
     
     //  Getter for origin of tree \ Геттер корня дерева
-    public getOrigin():NodeM{
+    public getOrigin():NodeT{
         return this.origin;
     }
 
@@ -19,7 +19,7 @@ import { NodeM } from "./Node";
     };
     
     // key search \ Поиск по ключу
-    public search(key:number):NodeM | null{
+    public search(key:number):NodeT | null{
         return this.origin.search(this.origin, key);
     }
 
