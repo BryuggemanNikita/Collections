@@ -29,6 +29,6 @@ let treeOrigin = tree.getOrigin()
 // console.log("\n")
 // console.log(tree.has(10));
 
-tree.delete(10)
-console.log(tree.getOrigin().getLeft())
-console.log(tree.getOrigin().getRight())
+// tree.delete(10)
+// console.log(tree.getOrigin().getLeft())
+// console.log(tree.getOrigin().getRight())
