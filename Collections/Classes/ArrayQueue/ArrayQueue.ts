@@ -1,11 +1,13 @@
-export class QueueArr<T> {
+import { Queue } from "../../Interfaces/Queue/Queue";
+
+export class ArrayQueue<T> implements Queue<T> {
     private arr: T[] = [];
 
     public append(value: T): void {
         this.arr.push(value);
     };
 
-    public pop() {
+    public pop():T|undefined {
         return (this.arr.shift());
     };
 
@@ -22,14 +24,14 @@ export class QueueArr<T> {
     };
 };
 
-let queue = new QueueArr();
+// let queue = new ArrayQueue();
 
-queue.extend(["h", "e", "l", "l", "o", " "]);
-queue.append("W");
-queue.append("r");
-queue.append("l");
-queue.append("d");
+// queue.extend(["h", "e", "l", "l", "o", " "]);
+// queue.append("W");
+// queue.append("r");
+// queue.append("l");
+// queue.append("d");
 
-while(!queue.isEmpty()){
-    console.log(queue.pop());
-};
+// while(!queue.isEmpty()){
+//     console.log(queue.pop());
+// };

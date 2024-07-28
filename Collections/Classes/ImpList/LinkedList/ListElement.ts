@@ -1,12 +1,12 @@
-import { Errors } from "./Errors";
-
 export class ListElement {
     private value;
     private next;
+    private prev;
 
-    constructor(value = null, next = null) {
+    constructor(value = null, next = null, prev = null) {
         this.value = value;
         this.next = next;
+        this.prev = prev;
     };
 
     public getValue() {
@@ -20,8 +20,19 @@ export class ListElement {
         return null;
     };
 
+    public getPrev(){
+        if (this.prev !== null){
+            return this.prev;
+        };
+        return null;
+    }
+
     public setNext(value): void {
         this.next = value;
+    };
+
+    public setPrev(value):void{
+        this.prev = value;
     };
 
     public setValue(value): void {
