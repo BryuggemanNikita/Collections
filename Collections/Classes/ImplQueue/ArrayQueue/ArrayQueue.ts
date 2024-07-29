@@ -1,4 +1,4 @@
-import { Queue } from "../../Interfaces/Queue/Queue";
+import { Queue } from "../../../Interfaces/Queue/Queue";
 
 export class ArrayQueue<T> implements Queue<T> {
     private arr: T[] = [];

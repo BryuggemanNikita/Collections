@@ -1,4 +1,4 @@
-import { Deque } from "../../Interfaces/Queue/Deque/Deque";
+import {Deque} from "../../../Interfaces/Deque/Deque";
 
 export class ArrayDeque<T> implements Deque<T> {
     private arr: T[] = [];

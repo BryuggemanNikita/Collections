@@ -1,4 +1,4 @@
-import { Queue } from "../Queue";
+import { Queue } from "../Queue/Queue";
 
 export interface Deque<T> extends Queue<T> {
     appendFirst(value: T): void;

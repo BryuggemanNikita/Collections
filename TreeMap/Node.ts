@@ -1,4 +1,3 @@
-
 // Node for BinaryTree
 export class NodeT {
     private key: number;

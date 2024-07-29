@@ -1,7 +1,7 @@
 export class ListElement {
     private value;
-    private next;
-    private prev;
+    private next:ListElement|null;
+    private prev:ListElement|null;
 
     constructor(value = null, next = null, prev = null) {
         this.value = value;
@@ -20,7 +20,7 @@ export class ListElement {
         return null;
     };
 
-    public getPrev(){
+    public getPrev(): ListElement | null {
         if (this.prev !== null){
             return this.prev;
         };
