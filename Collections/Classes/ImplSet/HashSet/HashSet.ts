@@ -1,4 +1,4 @@
-import { Set } from "../../Interfaces/Set/Set";
+import { Set } from "../../../Interfaces/Set/Set";
 
 export class HashSet<T> implements Set<T> {
     private set: T[] = [];

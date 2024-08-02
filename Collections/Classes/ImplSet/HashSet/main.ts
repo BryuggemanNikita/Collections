@@ -9,6 +9,4 @@ hsh.add(17);
 hsh.add(2);
 hsh.add(0);
 
-
-
 console.log(hsh.size()); //4

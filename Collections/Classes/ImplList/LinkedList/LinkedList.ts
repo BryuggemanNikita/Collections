@@ -1,4 +1,4 @@
-import { ListElement } from "./ListElement";
+import {ListElement} from "../../../Nodes/ListElement"
 import { List } from "../../../Interfaces/List/List";
 
 export class LinkedList implements List {

@@ -1,4 +1,4 @@
-import { LinkedList } from "./Linkedlist";
+import { LinkedList } from "./LinkedList";
 
 let list = new LinkedList();
 

@@ -47,5 +47,5 @@ export class ArrayList<T> implements List {
 
     public getArray():T[]{
         return this.array;
-    }
+    };
 };
