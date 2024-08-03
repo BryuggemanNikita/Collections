@@ -1,20 +1,23 @@
-import { Node } from "../Collections/Nodes/Node";
+import { Node } from "../../Nodes/Node";
 
 // Binary tree. implementation of containing nodes
-export class BinaryTree{
-    private origin: Node;
+export class BinaryTree {
+    private origin: Node | null;
 
     constructor(originKey: number, originValue) {
         this.origin = new Node(originKey, originValue);
     };
 
-    //  Getter for origin of tree \ Геттер корня дерева
-    public getOrigin(): Node {
+    //Getter for origin of tree \ Геттер корня дерева
+    public getOrigin(): Node | null {
         return this.origin;
-    }
+    };
 
     // insert an element to the tree \ Добавление эл-та в дерево
     public insert(key: number, value): void {
+        if (this.origin == null) {
+            this.origin = new Node(key, value);
+        };
         WorkerBinaryTree.insert(this.origin, key, value);
     };
 
@@ -29,29 +32,37 @@ export class BinaryTree{
     };
 
     // search for the maximum node in the tree starting from the specified node
-    public max():Node|null{
+    public max(): Node | null {
         return WorkerBinaryTree.max(this.origin);
     };
 
     // search for the minimum node in the tree starting from the specified node
-    public min():Node|null{
+    public min(): Node | null {
         return WorkerBinaryTree.min(this.origin);
     };
 
-    public delete(key: number) : Node | null {
+    public delete(key: number): Node | null {
+        if (this.origin === null) return null;
+        if (this.origin.getKey() == key) {
+            let ret = this.origin;
+            this.origin = null;
+            return ret;
+        };
         return WorkerBinaryTree.delete(this.origin, key);
     };
 
 };
 
-abstract class WorkerBinaryTree{
-    public static max(node:Node|null):Node|null{
-        if(node === null) return null;
+abstract class WorkerBinaryTree {
+
+    public static max(node: Node | null): Node | null {
+        if (node === null) return null;
         let rightNode = node.getRight();
         return rightNode == null ? node : WorkerBinaryTree.max(rightNode);
     };
 
-    public static min(node: Node): Node {
+    public static min(node: Node | null): Node | null {
+        if (node === null) return null;
         let leftNode = node.getLeft();
         return leftNode == null ? node : WorkerBinaryTree.min(leftNode);
     };
@@ -87,24 +98,26 @@ abstract class WorkerBinaryTree{
         return thisKey > key ? WorkerBinaryTree.search(leftNode, key) : WorkerBinaryTree.search(rightNode, key);
     };
 
-    public static delete(node: Node | null, key: number){
-        if (node === null) return null;
-       
+    public static delete(node: Node | null, key: number): Node | null {
+        if(node === null) return null;
+
+        // let prevNode:Node;
         let thisKey = node.getKey();
         let leftNode = node.getLeft();
         let rightNode = node.getRight();
-        
-        if(thisKey !== key){
-            node = WorkerBinaryTree.delete( key >= thisKey ? rightNode : leftNode, key);
-        }else{
-            let maxLeft = WorkerBinaryTree.max(node.getLeft())
-            console.log("---")
-            console.log(maxLeft)
-            console.log("---")
-            if(maxLeft == null){
-                node.setRight(node.getRight())
-            };
+
+        if (thisKey == key) {
+            let ret:Node = node;
+            if(leftNode == null){
+                // node.setKey()
+            }
+
+            // console.log(prevNode)
+        } else {
+            // prevNode = node;
+            this.delete((thisKey >= key) ? leftNode : rightNode, key);
         };
+
         return node;
     };
 };

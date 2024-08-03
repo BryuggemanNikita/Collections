@@ -5,7 +5,7 @@ export class Node {
     private left: Node | null = null;
     private right: Node | null = null;
     
-    constructor(key, value) {
+    constructor(key:number, value) {
         this.key = key;
         this.value = value;
     };
@@ -32,5 +32,13 @@ export class Node {
 
     public setRight(right: Node|null): void {
         this.right = right;
+    };
+
+    public setKey(key:number){
+        this.key = key;
+    };
+
+    public setValue(value){
+        this.value = value;
     };
 };

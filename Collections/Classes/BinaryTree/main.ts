@@ -19,11 +19,11 @@ tree.insert(19, "BIGOverHello");
 
 let treeOrigin = tree.getOrigin()
 
-console.log(treeOrigin.getLeft()?.getKey());
-console.log(treeOrigin.getKey());
-console.log(treeOrigin.getRight()?.getKey());
-console.log(treeOrigin.getRight()?.getLeft()?.getKey());
-console.log(treeOrigin.getRight()?.getRight()?.getKey());
+console.log(treeOrigin?.getLeft()?.getKey());
+console.log(treeOrigin?.getKey());
+console.log(treeOrigin?.getRight()?.getKey());
+console.log(treeOrigin?.getRight()?.getLeft()?.getKey());
+console.log(treeOrigin?.getRight()?.getRight()?.getKey());
 
 console.log("2---------------")
 
@@ -46,9 +46,12 @@ console.log(tree.delete(17))
 
 console.log("4---------------")
 
+
+
 treeOrigin = tree.getOrigin()
 console.log(treeOrigin);
 
-console.log("]]]]]");
+// console.log("]]]]]");
 
-console.log()
+// console.log()
+
