@@ -1,16 +1,16 @@
-// Node for BinaryTree
+// Node for BinaryTree, TreeMap
 export class Node {
-    private key: number;
+    private key;
     private value;
     private left: Node | null = null;
     private right: Node | null = null;
     
-    constructor(key:number, value) {
+    constructor(key, value) {
         this.key = key;
         this.value = value;
     };
 
-    public getKey(): number {
+    public getKey() {
         return this.key;
     };
 
@@ -34,7 +34,7 @@ export class Node {
         this.right = right;
     };
 
-    public setKey(key:number){
+    public setKey(key){
         this.key = key;
     };
 

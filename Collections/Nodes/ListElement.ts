@@ -1,3 +1,4 @@
+//Element for LinkedList
 export class ListElement {
     private value;
     private next:ListElement|null;

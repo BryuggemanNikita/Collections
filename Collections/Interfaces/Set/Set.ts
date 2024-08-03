@@ -5,7 +5,7 @@ export interface Set<T>{
 
     delete(value:T):boolean;
 
-    entries();
+    // entries();
     
     has(value:T):boolean;
 
