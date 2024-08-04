@@ -1,8 +1,8 @@
 //Element for LinkedList
-export class ListElement {
+export class LinkedListElement {
     private value;
-    private next:ListElement|null;
-    private prev:ListElement|null;
+    private next: LinkedListElement | null;
+    private prev: LinkedListElement | null;
 
     constructor(value = null, next = null, prev = null) {
         this.value = value;
@@ -14,15 +14,15 @@ export class ListElement {
         return this.value;
     };
 
-    public getNext(): ListElement | null {
-        if (this.next !== null){
+    public getNext(): LinkedListElement | null {
+        if (this.next !== null) {
             return this.next;
         };
         return null;
     };
 
-    public getPrev(): ListElement | null {
-        if (this.prev !== null){
+    public getPrev(): LinkedListElement | null {
+        if (this.prev !== null) {
             return this.prev;
         };
         return null;
@@ -32,11 +32,16 @@ export class ListElement {
         this.next = value;
     };
 
-    public setPrev(value):void{
+    public setPrev(value): void {
         this.prev = value;
     };
 
     public setValue(value): void {
         this.value = value;
+    };
+
+    public toString():string{
+        return `${this.value.toString()}${(this.next !== null) ? this.next.toString() : "null"}${
+            (this.prev !== null) ? this.prev.toString() : "null"}LinkedListElement`
     };
 };

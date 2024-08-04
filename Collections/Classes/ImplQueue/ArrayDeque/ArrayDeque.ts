@@ -34,6 +34,14 @@ export class ArrayDeque<T> implements Deque<T> {
     public clear(): void {
         this.arr = [];
     };
+
+    public has(value:T):boolean{
+        let flag: boolean = false;
+        this.arr.forEach(e => {
+            if (e === value) flag = true;
+        });
+        return flag;
+    };
 };
 
 // let arrDeque = new ArrayDeque();

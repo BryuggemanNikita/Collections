@@ -41,4 +41,9 @@ export class Node {
     public setValue(value){
         this.value = value;
     };
+
+    public toString():string{
+        return `${this.key.toString()}${this.value.toString()}${(this.left !== null) ? this.left.toString() : "null"}${
+            (this.right !== null) ? this.right.toString() : "null"}Node`
+    };
 };

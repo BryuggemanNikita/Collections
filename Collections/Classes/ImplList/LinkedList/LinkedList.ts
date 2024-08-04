@@ -1,12 +1,12 @@
-import {ListElement} from "../../../Nodes/ListElement"
+import {LinkedListElement} from "../../../Nodes/LinkedListElement"
 import { List } from "../../../Interfaces/List/List";
 
 export class LinkedList implements List {
-    private head: null | ListElement = null;
-    private tail: null | ListElement = null;
+    private head: null | LinkedListElement = null;
+    private tail: null | LinkedListElement = null;
 
     public append(value): void {
-        value = new ListElement(value);
+        value = new LinkedListElement(value);
         if (this.head === null) {
             this.head = value;
             return;
@@ -34,7 +34,7 @@ export class LinkedList implements List {
     };
 
     public count(): number {
-        let node: ListElement | null = this.head;
+        let node: LinkedListElement | null = this.head;
         let count: number = 0;
         while (node !== null) {
             count++;
@@ -48,7 +48,7 @@ export class LinkedList implements List {
             return -1;
         };
 
-        let node: ListElement | null = this.head;
+        let node: LinkedListElement | null = this.head;
         let valueNode = node.getValue();
         let ind: number = 0;
         let count: number = this.count();
@@ -62,10 +62,10 @@ export class LinkedList implements List {
     };
 
     public insert(ind: number, value): void {
-        value = new ListElement(value);
+        value = new LinkedListElement(value);
         let index: number = 0;
-        let leftNode: ListElement | null = null;
-        let rightNode: ListElement | null = this.head;
+        let leftNode: LinkedListElement | null = null;
+        let rightNode: LinkedListElement | null = this.head;
         let count = this.count() - 1;
 
         if(ind <= 0){
@@ -87,9 +87,9 @@ export class LinkedList implements List {
 
     pop(ind: number): void {
         let index: number = 0;
-        let node: ListElement | null = this.head;
-        let leftNode: ListElement | null | undefined;
-        let rightNode: ListElement | null | undefined;
+        let node: LinkedListElement | null = this.head;
+        let leftNode: LinkedListElement | null | undefined;
+        let rightNode: LinkedListElement | null | undefined;
         while (index !== ind && node !== null) {
             index++;
             node = node.getNext();
@@ -102,7 +102,7 @@ export class LinkedList implements List {
     };
 
     remove(value): void {
-        let node: ListElement | null = this.head;
+        let node: LinkedListElement | null = this.head;
         if(node === null){
             return;
         };
@@ -110,8 +110,8 @@ export class LinkedList implements List {
         let valueNode = node.getValue();
         let ind: number = 0;
         let count: number = this.count();
-        let leftNode: ListElement | null | undefined;
-        let rightNode: ListElement | null | undefined;
+        let leftNode: LinkedListElement | null | undefined;
+        let rightNode: LinkedListElement | null | undefined;
     
         while ( valueNode !== value && node !== null) {
             ind++;
@@ -127,10 +127,10 @@ export class LinkedList implements List {
         rightNode?.setPrev(leftNode);
     };
 
-    public getHead(): ListElement | null {
+    public getHead(): LinkedListElement | null {
         return this.head;
     };
-    public getTail(): ListElement | null {
+    public getTail(): LinkedListElement | null {
         return this.tail;
     };
 };

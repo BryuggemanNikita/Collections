@@ -1,18 +1,15 @@
-import { HashSett } from "./HashSet";
-import { HashSet } from "./HashSet";
-import { hashCode } from "../../../../HashFunction/HashCode";
-import { LinkedListElement } from "../../../Nodes/LinkedListElement";
-
-let hsh = new HashSett();
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var HashSet_1 = require("./HashSet");
+var HashSet_2 = require("./HashSet");
+var hsh = new HashSet_1.HashSett();
 hsh.add(12);
 hsh.add(2);
 hsh.add(12);
 hsh.add(17);
 hsh.add(2);
 hsh.add(0);
-
-let hset = new HashSet<string>();
+var hset = new HashSet_2.HashSet();
 hset.add("Рома");
 hset.add("Илья");
 hset.add("Настя");
@@ -25,10 +22,8 @@ hset.add("Лев");
 hset.add("Ярик");
 hset.add("Дима");
 hset.add("Оксана");
-
-
-
-
+hset.add(134);
+hset.add(64);
 console.log(hset);
 console.log("");
 console.log(hset.getBucket(0));
@@ -52,10 +47,6 @@ console.log(hset.getBucket(17));
 console.log(hset.getBucket(18));
 console.log(hset.getBucket(19));
 // console.log(hset.getBucket();
-
-
-
-
 // let hset = new HashSet();
 // hset.add(23);
 // console.log(hset);
