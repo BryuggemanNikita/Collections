@@ -1,16 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.HashSet = void 0;
-var Bucket_1 = require("../../../Nodes/Bucket");
+exports.HashMap = void 0;
+var HashMapBucket_1 = require("../../../Nodes/HashMapBucket");
 var HashCode_1 = require("../../../../HashFunction/HashCode");
-var HashSet = /** @class */ (function () {
-    function HashSet() {
+var HashMap = /** @class */ (function () {
+    function HashMap() {
         this.buckets = [];
         this.countBuckets = 0;
         this.countElements = 0;
         var x = 0;
         while (x !== 5) {
-            var newBucket = new Bucket_1.Bucket();
+            var newBucket = new HashMapBucket_1.HashMapBucket();
             this.buckets.push(newBucket);
             x++;
         }
@@ -18,11 +18,16 @@ var HashSet = /** @class */ (function () {
         this.countBuckets = 5;
     }
     ;
-    HashSet.prototype.add = function (value) {
+    HashMap.prototype.set = function (key, value) {
+        if (this.has(key)) {
+            var element = this.get(key);
+            if (element !== undefined)
+                element.value = value;
+        }
         var thisBuckets = this.buckets;
         var countBuckets = this.countBuckets;
         var countElements = this.countElements;
-        var hashValue = (0, HashCode_1.hashCode)(value);
+        var hashValue = (0, HashCode_1.hashCode)(key);
         var hashIndInBuckets = hashValue % countBuckets;
         var bucketInd = thisBuckets[hashIndInBuckets].getBucket();
         if (countBuckets === countElements) {
@@ -30,7 +35,7 @@ var HashSet = /** @class */ (function () {
             var newBuckets = [];
             var x = 0;
             while (x !== countNewBuckets) {
-                var newBucket = new Bucket_1.Bucket();
+                var newBucket = new HashMapBucket_1.HashMapBucket();
                 newBuckets.push(newBucket);
                 x++;
             }
@@ -39,21 +44,20 @@ var HashSet = /** @class */ (function () {
             this.countElements = 0;
             this.countBuckets = countNewBuckets;
             for (var i = 0; i < countBuckets; i++) {
-                console.log("I" + i);
                 while (!thisBuckets[i].getBucket().isEmpty()) {
                     var elAdd = thisBuckets[i].getBucket().pop();
                     if (elAdd !== undefined)
-                        this.add(elAdd);
+                        this.set(elAdd.key, elAdd.value);
                 }
                 ;
             }
             ;
-            this.add(value);
+            this.set(key, value);
             return;
         }
         ;
-        if (!bucketInd.has(value)) {
-            thisBuckets[hashIndInBuckets].getBucket().append(value);
+        if (!bucketInd.has(key)) {
+            bucketInd.set(key, value);
             this.countElements++;
         }
         else {
@@ -62,10 +66,21 @@ var HashSet = /** @class */ (function () {
         ;
     };
     ;
-    HashSet.prototype.clear = function () {
+    HashMap.prototype.get = function (key) {
+        if (!this.has(key))
+            return undefined;
+        var thisBuckets = this.buckets;
+        var countBuckets = this.countBuckets;
+        var hashValue = (0, HashCode_1.hashCode)(key);
+        var hashIndInBuckets = hashValue % countBuckets;
+        var bucketInd = thisBuckets[hashIndInBuckets].getBucket();
+        return bucketInd.get(key);
+    };
+    ;
+    HashMap.prototype.clear = function () {
         var x = 0;
         while (x !== 5) {
-            var newBucket = new Bucket_1.Bucket();
+            var newBucket = new HashMapBucket_1.HashMapBucket();
             this.buckets.push(newBucket);
             x++;
         }
@@ -74,40 +89,40 @@ var HashSet = /** @class */ (function () {
         ;
     };
     ;
-    HashSet.prototype.delete = function (value) {
-        if (!this.has(value))
+    HashMap.prototype.delete = function (key) {
+        if (!this.has(key))
             return false;
         var thisBuckets = this.buckets;
         var countBuckets = this.countBuckets;
-        var hashValue = (0, HashCode_1.hashCode)(value);
+        var hashValue = (0, HashCode_1.hashCode)(key);
         var hashIndInBuckets = hashValue % countBuckets;
         var bucketInd = thisBuckets[hashIndInBuckets].getBucket();
-        bucketInd.remove(value);
+        bucketInd.delete(key);
         return true;
     };
     ;
-    HashSet.prototype.has = function (value) {
+    HashMap.prototype.has = function (key) {
         var thisBuckets = this.buckets;
-        var hashValue = (0, HashCode_1.hashCode)(value);
+        var hashValue = (0, HashCode_1.hashCode)(key);
         var countBuckets = this.countBuckets;
         var hashIndInBuckets = hashValue % countBuckets;
         var bucketInd = thisBuckets[hashIndInBuckets].getBucket();
-        return (bucketInd.has(value));
+        return (bucketInd.has(key));
     };
     ;
-    HashSet.prototype.getBucket = function (ind) {
+    HashMap.prototype.getBucket = function (ind) {
         return this.buckets[ind];
     };
     ;
-    HashSet.prototype.size = function () {
+    HashMap.prototype.size = function () {
         return this.countElements;
     };
     ;
-    HashSet.prototype.sizeBuckets = function () {
+    HashMap.prototype.sizeBuckets = function () {
         return this.buckets.length;
     };
     ;
-    return HashSet;
+    return HashMap;
 }());
-exports.HashSet = HashSet;
+exports.HashMap = HashMap;
 ;

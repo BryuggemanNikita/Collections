@@ -1,7 +1,7 @@
 import { Map } from "../../../Interfaces/Map/Map";
 import { obj } from "../../../Nodes/ObjectLHM";
 
-export class LinkedHashMap<K, V> implements Map<K, V>{
+export class ArrayMap<K, V> implements Map<K, V>{
 
     private arrMap:obj<K, V>[] = [];
 
@@ -33,6 +33,15 @@ export class LinkedHashMap<K, V> implements Map<K, V>{
         this.arrMap.splice(elIndex, 1);
     };
 
+    public pop(ind: number | null = null): obj<K, V> | undefined {
+        if(ind === null){
+            return this.arrMap.pop();
+        };
+        let el = this.arrMap[ind];
+        this.arrMap.splice(ind, 1);
+        return el;
+    };
+
     public has(key: K): boolean {
         let arr:K[] = this.arrMap.map((e) => e.key);
         let elIndex = arr.indexOf(key);
@@ -49,5 +58,9 @@ export class LinkedHashMap<K, V> implements Map<K, V>{
     
     public getMap():object[]{
         return this.arrMap;
+    };
+
+    public isEmpty():boolean{
+        return (this.arrMap.length === 0) ? true : false;
     };
 };

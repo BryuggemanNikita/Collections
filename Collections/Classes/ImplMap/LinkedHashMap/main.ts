@@ -1,6 +1,6 @@
-import { LinkedHashMap } from "./LinkedHashMap";
+import { ArrayMap } from "./ArrayMap";
 
-let lhm = new LinkedHashMap();
+let lhm = new ArrayMap();
 lhm.set(12, "3");
 lhm.set(0, 3);
 lhm.set(12, 1203);

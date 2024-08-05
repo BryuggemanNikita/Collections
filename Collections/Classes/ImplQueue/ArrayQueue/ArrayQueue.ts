@@ -26,14 +26,6 @@ export class ArrayQueue<T> implements Queue<T> {
     public size():number{
         return this.arr.length;
     };
-
-    public has(value:T):boolean{
-        let flag: boolean = false;
-        this.arr.forEach(e => {
-            if (e === value) flag = true;
-        });
-        return flag;
-    };
 };
 
 // let queue = new ArrayQueue();

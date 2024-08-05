@@ -1,7 +1,7 @@
-import { ArrayQueue } from "../Classes/ImplQueue/ArrayQueue/ArrayQueue";
+import { ArrayList } from "../Classes/ImplList/ArrayList/ArrayList";
 
 export class Bucket<T> {
-    private bucket: ArrayQueue<T> = new ArrayQueue<T>();
+    private bucket: ArrayList<T> = new ArrayList<T>();
 
     public getBucket() {
         return this.bucket;
