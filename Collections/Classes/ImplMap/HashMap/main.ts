@@ -10,7 +10,7 @@ hmap.set("Кирилл", 10);
 hmap.set("Оксана", 30);
 hmap.set("Сергей", 30);
 hmap.set("Вася", 12);
-hmap.delete("Вася")
+hmap.delete("Вася");
 
 hmap.set("Кирилл", 11)
 

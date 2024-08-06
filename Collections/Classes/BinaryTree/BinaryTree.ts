@@ -1,7 +1,7 @@
 import { Node } from "../../Nodes/Node";
 
 // Binary tree. implementation of containing nodes
-export class BinaryTree {
+export class BinaryTree{
     private origin: Node | null;
 
     constructor(originKey: number, originValue) {
@@ -42,31 +42,24 @@ export class BinaryTree {
     };
 
     public delete(key: number): Node | null {
-        if (this.origin === null) return null;
-        if (this.origin.getKey() == key) {
-            let ret = this.origin;
-            this.origin = null;
-            return ret;
-        };
-        return WorkerBinaryTree.delete(this.origin, key);
+        return WorkerBinaryTree.delete(this.origin, null, key);
     };
-
 };
 
 abstract class WorkerBinaryTree {
-
+    // search for the maximum node in the tree starting from the specified node
     public static max(node: Node | null): Node | null {
         if (node === null) return null;
         let rightNode = node.getRight();
         return rightNode == null ? node : WorkerBinaryTree.max(rightNode);
     };
-
+    // search for the minimum node in the tree starting from the specified node
     public static min(node: Node | null): Node | null {
         if (node === null) return null;
         let leftNode = node.getLeft();
         return leftNode == null ? node : WorkerBinaryTree.min(leftNode);
     };
-
+    // insert an element to the tree \ Добавление эл-та в дерево
     public static insert(node: Node, key: number, value): void {
         let nodeSet = new Node(key, value)
         let thisKey = node.getKey();
@@ -85,7 +78,7 @@ abstract class WorkerBinaryTree {
             else WorkerBinaryTree.insert(thisRight, key, value)
         };
     };
-
+    // key search \ Поиск по ключу
     public static search(node: Node | null, key: number): Node | null {
         if (node === null) return null;
 
@@ -98,24 +91,37 @@ abstract class WorkerBinaryTree {
         return thisKey > key ? WorkerBinaryTree.search(leftNode, key) : WorkerBinaryTree.search(rightNode, key);
     };
 
-    public static delete(node: Node | null, key: number): Node | null {
-        if(node === null) return null;
+    public static delete(node: Node | null, lastNode: Node | null, key: number): Node | null {
+        if (node === null) return null;
 
-        // let prevNode:Node;
         let thisKey = node.getKey();
         let leftNode = node.getLeft();
         let rightNode = node.getRight();
 
-        if (thisKey == key) {
-            let ret:Node = node;
-            if(leftNode == null){
-                // node.setKey()
-            }
+        if (thisKey === key) {
 
-            // console.log(prevNode)
+            if (leftNode === null && rightNode === null) {
+                let leftKey = lastNode?.getLeft()?.getKey();
+                (leftKey === key) ? lastNode?.setLeft(null) : lastNode?.setRight(null);
+
+            } else if(leftNode === null && rightNode !== null){
+                let leftLastNode = lastNode?.getLeft();
+                (leftLastNode === node) ? lastNode?.setLeft(rightNode) : lastNode?.setRight(rightNode);
+
+            }else if(leftNode !== null && rightNode === null){
+                let leftLastNode = lastNode?.getLeft();
+                (leftLastNode === node) ? lastNode?.setLeft(leftNode) : lastNode?.setRight(leftNode);
+            }else{
+                let minRight = this.min(rightNode);
+                let keyMinRight = minRight?.getKey();
+                let valueMinRight = minRight?.getValue();
+                this.delete(node, lastNode, keyMinRight);
+                node.setKey(keyMinRight);
+                node.setValue(valueMinRight);
+            };
+
         } else {
-            // prevNode = node;
-            this.delete((thisKey >= key) ? leftNode : rightNode, key);
+            this.delete((thisKey >= key) ? leftNode : rightNode, node, key);
         };
 
         return node;

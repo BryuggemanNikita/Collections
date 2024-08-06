@@ -103,10 +103,6 @@ export class HashMap<K, V> implements Map<K, V> {
         return (bucketInd.has(key));
     };
 
-    public getBucket(ind: number): HashMapBucket<K, V> {
-        return this.buckets[ind];
-    };
-
     public size(): number {
         return this.countElements;
     };
