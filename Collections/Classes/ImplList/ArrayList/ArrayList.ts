@@ -4,26 +4,32 @@ export class ArrayList<T> implements List {
 
     private array: T[] = [];
 
+    // Insert an element to the array \ Добавление эл-та в массив
     public append(value: T): void {
         this.array.push(value);
     };
 
+    // Insert an array to the array \ Добавление массива в массив
     public appendArr(value: T[]): void {
         this.array.push(...value);
     };
 
+    // Clearing the array \ Очистка массива
     public clear(): void {
         this.array = [];
     };
 
+    // The number of elements in the array \ кол-во элементов в массиве
     public count(): number {
-        return this.array.length
+        return this.array.length;
     };
 
+    // The index of the element by value \ Индекс элемента по значению
     public index(value: T): number {
         return this.array.indexOf(value);
     };
 
+    // Adding an item by index \ Добавление элемента по индексу
     public insert(ind: number, value: T): void {
         let arr = this.array;
         let left = arr.slice(0, ind);
@@ -31,6 +37,7 @@ export class ArrayList<T> implements List {
         this.array = left.concat(value, right);
     };
 
+    // Deleting an element \ Удаление элемента
     public pop(ind: number | null = null): T | undefined {
         if (ind === null) {
             return this.array.pop();
@@ -40,6 +47,7 @@ export class ArrayList<T> implements List {
         return el;
     };
 
+    // The presence of a key in the array \ Наличие элемента с заданным ключом
     public has(value: T): boolean {
         let flag: boolean = false;
         this.array.forEach(e => {
@@ -48,6 +56,7 @@ export class ArrayList<T> implements List {
         return flag;
     };
 
+    // Deleting an element by value \ Удаление элемента по значения
     public remove(value: T): void {
         let indValue = this.array.indexOf(value);
         this.array.splice(indValue, 1);

@@ -1,19 +1,19 @@
 import { Map } from "../../../Interfaces/Map/Map";
 import { obj } from "../../../Nodes/ObjectLHM";
 
-export class ArrayMap<K, V> implements Map<K, V>{
+export class ArrayMap<K, V> implements Map<K, V> {
 
-    private arrMap:obj<K, V>[] = [];
+    private arrMap: obj<K, V>[] = [];
 
     public set(key: K, value: V): void {
-        let obj = {key:key, value:value};
-        if(!this.has(key)){
+        let obj = { key: key, value: value };
+        if (!this.has(key)) {
             this.arrMap.push(obj);
             return;
-        }else{
+        } else {
             let arr = this.arrMap;
-            arr.forEach(e =>{
-                if(e.key === key){
+            arr.forEach(e => {
+                if (e.key === key) {
                     e.value = value;
                     return;
                 };
@@ -22,19 +22,19 @@ export class ArrayMap<K, V> implements Map<K, V>{
     };
 
     get(key: K) {
-        let arr:K[] = this.arrMap.map((e) => e.key);
+        let arr: K[] = this.arrMap.map((e) => e.key);
         let elIndex = arr.indexOf(key);
         return this.arrMap[elIndex];
     };
-    
+
     public delete(key: K) {
-        let arr:K[] = this.arrMap.map((e) => e.key);
+        let arr: K[] = this.arrMap.map((e) => e.key);
         let elIndex = arr.indexOf(key);
         this.arrMap.splice(elIndex, 1);
     };
 
     public pop(ind: number | null = null): obj<K, V> | undefined {
-        if(ind === null){
+        if (ind === null) {
             return this.arrMap.pop();
         };
         let el = this.arrMap[ind];
@@ -43,7 +43,7 @@ export class ArrayMap<K, V> implements Map<K, V>{
     };
 
     public has(key: K): boolean {
-        let arr:K[] = this.arrMap.map((e) => e.key);
+        let arr: K[] = this.arrMap.map((e) => e.key);
         let elIndex = arr.indexOf(key);
         return (elIndex === -1) ? false : true;
     };
@@ -55,12 +55,12 @@ export class ArrayMap<K, V> implements Map<K, V>{
     public size(): number {
         return this.arrMap.length;
     };
-    
-    public getMap():object[]{
+
+    public getMap(): object[] {
         return this.arrMap;
     };
 
-    public isEmpty():boolean{
+    public isEmpty(): boolean {
         return (this.arrMap.length === 0) ? true : false;
     };
 };
