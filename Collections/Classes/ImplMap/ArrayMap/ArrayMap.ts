@@ -5,13 +5,14 @@ export class ArrayMap<K, V> implements Map<K, V> {
 
     private arrMap: obj<K, V>[] = [];
 
+    // Insert or changing an element in array
     public set(key: K, value: V): void {
-        let obj = { key: key, value: value };
         if (!this.has(key)) {
+            let obj: obj<K, V> = { key: key, value: value };
             this.arrMap.push(obj);
             return;
         } else {
-            let arr = this.arrMap;
+            let arr: obj<K, V>[] = this.arrMap;
             arr.forEach(e => {
                 if (e.key === key) {
                     e.value = value;
@@ -21,46 +22,55 @@ export class ArrayMap<K, V> implements Map<K, V> {
         };
     };
 
-    get(key: K) {
+    // Getter element with key
+    public get(key: K) {
         let arr: K[] = this.arrMap.map((e) => e.key);
         let elIndex = arr.indexOf(key);
         return this.arrMap[elIndex];
     };
 
+    // Removing an element from the ArrayMap for key \ Удаление элемента из массива по ключу
     public delete(key: K) {
         let arr: K[] = this.arrMap.map((e) => e.key);
         let elIndex = arr.indexOf(key);
         this.arrMap.splice(elIndex, 1);
     };
 
+    // Removing an element from the ArrayMap for index \ Удаление элемента из массива по индексу
     public pop(ind: number | null = null): obj<K, V> | undefined {
+        if(this.size() == 0) return undefined;
         if (ind === null) {
             return this.arrMap.pop();
         };
-        let el = this.arrMap[ind];
+        let el: obj<K, V> = this.arrMap[ind];
         this.arrMap.splice(ind, 1);
         return el;
     };
 
+    // Test by array has an element
     public has(key: K): boolean {
         let arr: K[] = this.arrMap.map((e) => e.key);
         let elIndex = arr.indexOf(key);
-        return (elIndex === -1) ? false : true;
+        return (elIndex !== -1);
     };
 
-    clear(): void {
+    // Clear array
+    public clear(): void {
         this.arrMap = [];
     };
 
+    // Getter length of array
     public size(): number {
         return this.arrMap.length;
     };
 
-    public getMap(): object[] {
-        return this.arrMap;
+    // Test for empty array
+    public isEmpty(): boolean {
+        return (this.arrMap.length === 0);
     };
 
-    public isEmpty(): boolean {
-        return (this.arrMap.length === 0) ? true : false;
+    // Getter this array
+    public getArray(): obj<K, V>[] {
+        return this.arrMap;
     };
 };

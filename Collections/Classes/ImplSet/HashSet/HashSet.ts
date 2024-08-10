@@ -8,24 +8,35 @@ export class HashSet<T> implements Set<T> {
     private countBuckets: number = 0;
     private countElements: number = 0;
 
-    constructor() {
+    constructor(countBuckets:number = 15) {
         let x = 0;
-        while (x !== 5) {
+        while (x !== countBuckets) {
             let newBucket = new Bucket<T>();
             this.buckets.push(newBucket);
             x++;
         };
-        this.countBuckets = 5;
+        this.countBuckets = countBuckets;
     };
 
     public add(value: T): void {
         let thisBuckets = this.buckets;
         let countBuckets = this.countBuckets
-        let countElements = this.countElements
         let hashValue: number = hashCode(value);
         let hashIndInBuckets: number = hashValue % countBuckets;
         let bucketInd = thisBuckets[hashIndInBuckets].getBucket();
 
+        if (!bucketInd.has(value)) {
+            thisBuckets[hashIndInBuckets].getBucket().append(value);
+            this.countElements++;
+        } else {
+            return
+        };
+    };
+
+    public expansion(){
+        let countBuckets = this.countBuckets
+        let countElements = this.countElements;
+        let thisBuckets = this.buckets;
         if (countBuckets === countElements) {
             let countNewBuckets = countBuckets * 2;
             let newBuckets: Bucket<T>[] = [];
@@ -46,15 +57,6 @@ export class HashSet<T> implements Set<T> {
                     if (elAdd !== undefined) this.add(elAdd);
                 };
             };
-            this.add(value);
-            return;
-        };
-
-        if (!bucketInd.has(value)) {
-            thisBuckets[hashIndInBuckets].getBucket().append(value);
-            this.countElements++;
-        } else {
-            return
         };
     };
 

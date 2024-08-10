@@ -1,6 +1,6 @@
 import { List } from "../../../Interfaces/List/List";
 
-export class ArrayList<T> implements List {
+export class ArrayList<T> implements List<T> {
 
     private array: T[] = [];
 
@@ -49,11 +49,8 @@ export class ArrayList<T> implements List {
 
     // The presence of a key in the array \ Наличие элемента с заданным ключом
     public has(value: T): boolean {
-        let flag: boolean = false;
-        this.array.forEach(e => {
-            if (e === value) flag = true;
-        });
-        return flag;
+        let indexValue = this.array.indexOf(value);
+        return (indexValue !== -1);
     };
 
     // Deleting an element by value \ Удаление элемента по значения
@@ -62,14 +59,17 @@ export class ArrayList<T> implements List {
         this.array.splice(indValue, 1);
     };
 
+    // Reverse array
     public reverse(): void {
         this.array = this.array.reverse();
     };
 
+    // Test for empty array
     public isEmpty(): boolean {
-        return (this.array.length == 0) ? true : false
+        return (this.array.length == 0);
     };
 
+    // Getter array
     public getArray(): T[] {
         return this.array;
     };

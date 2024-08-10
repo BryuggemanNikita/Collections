@@ -1,16 +1,16 @@
 
-export interface List{
-    append(value):void;
+export interface List<T>{
+    append(value:T):void;
 
     clear():void;
 
     count():number;
 
-    index(value):number;
+    index(value:T):number;
 
-    insert(ind:number, value);
+    insert(ind:number, value:T);
 
     pop(ind:number);
 
-    remove(value);
+    remove(value:T);
 };

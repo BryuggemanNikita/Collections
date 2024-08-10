@@ -12,7 +12,7 @@ export class ArrayQueue<T> implements Queue<T> {
     };
 
     public isEmpty(): boolean {
-        return (this.arr.length === 0) ? true : false;
+        return (this.arr.length === 0);
     };
 
     public extend(values:T[]):void{

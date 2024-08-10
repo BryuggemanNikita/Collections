@@ -20,7 +20,7 @@ export class ArrayDeque<T> implements Deque<T> {
     };
 
     public isEmpty(): boolean {
-        return (this.arr.length === 0) ? true : false;
+        return this.arr.length === 0;
     };
 
     public extendFirst(values: T[]): void {
@@ -36,24 +36,30 @@ export class ArrayDeque<T> implements Deque<T> {
     };
 
     public has(value:T):boolean{
-        let flag: boolean = false;
-        this.arr.forEach(e => {
-            if (e === value) flag = true;
-        });
-        return flag;
+        let lengthArr:number = this.arr.length;
+        let thisArr = this.arr;
+        for(let i = 0; i < lengthArr; i++){
+            if(thisArr[i] === value) return true
+        };
+        return false;
     };
 };
 
-// let arrDeque = new ArrayDeque();
+let arrDeque = new ArrayDeque();
 
-// arrDeque.extend(["l", "l", "o", " "]);
-// arrDeque.extendFirst(["e", "l"]);
-// arrDeque.appendFirst("H");
-// arrDeque.append("w");
-// arrDeque.append("r");
-// arrDeque.append("l");
-// arrDeque.append("d");
+arrDeque.extend(["l", "l", "o", " "]);
+arrDeque.extendFirst(["e", "l"]);
+arrDeque.appendFirst("H");
+arrDeque.append("w");
+arrDeque.append("r");
+arrDeque.append("l");
+arrDeque.append("d");
 
-// while(!arrDeque.isEmpty()){
-//     console.log(arrDeque.popFirst());
-// };
+console.log(arrDeque)
+console.log(arrDeque.has("w"))
+
+console.log(arrDeque.has("0"))
+
+while(!arrDeque.isEmpty()){
+    console.log(arrDeque.popFirst());
+};
