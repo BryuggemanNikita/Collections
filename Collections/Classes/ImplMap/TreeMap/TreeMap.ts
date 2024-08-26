@@ -3,7 +3,7 @@ import { Node } from "../../../Nodes/Node";
 
 export class TreeMap<K, V> implements Map<K, V> {
 
-    private origin: Node | null = null;
+    private origin: Node<K, V> | null = null;
     private sizeTree: number = 0;
 
     // Insert an element to the tree \ Добавление эл-та в дерево
@@ -35,7 +35,7 @@ export class TreeMap<K, V> implements Map<K, V> {
     };
 
     // Getter
-    public get(key: K, node: Node | null = this.origin): Node | null {
+    public get(key: K, node: Node<K, V> | null = this.origin): Node<K, V> | null {
         if (node === null) return null;
         let keyNode = node.getKey();
         let leftNode = node.getLeft();
@@ -45,7 +45,7 @@ export class TreeMap<K, V> implements Map<K, V> {
     };
 
     // Removing an object from the tree \ Удаление объекта из дерева
-    public delete(key: K, node: Node | null = this.origin, lastNode: Node | null = null) {
+    public delete(key: K, node: Node<K, V> | null = this.origin, lastNode: Node<K, V> | null = null) {
         if (node === null) return null;
 
         let thisKey = node.getKey();
@@ -53,35 +53,58 @@ export class TreeMap<K, V> implements Map<K, V> {
         let rightNode = node.getRight();
 
         if (thisKey === key) {
-            if (leftNode === null && rightNode === null) {
+            if (lastNode == null) {
+                let origin = this.origin
+
+                if (leftNode === null && rightNode === null) {
+                    this.origin = null;
+
+                } else if (rightNode !== null) {
+                    let minRight = this.min(rightNode)
+                    if (minRight === null) return null;
+                    let keyMinRight = minRight.getKey();
+                    let valueMinRight = minRight.getValue();
+                    this.delete(keyMinRight);
+                    origin?.setKey(keyMinRight);
+                    origin?.setValue(valueMinRight);
+
+                } else {
+                    let maxLeft = this.max(leftNode)
+                    if (maxLeft === null) return null;
+                    let keyMaxLeft = maxLeft.getKey();
+                    let valueMaxLeft = maxLeft.getValue();
+                    this.delete(keyMaxLeft);
+                    origin?.setKey(keyMaxLeft);
+                    origin?.setValue(valueMaxLeft);
+                };
+
+            } else if (leftNode === null && rightNode === null) {
                 let leftKey = lastNode?.getLeft()?.getKey();
                 (leftKey === key) ? lastNode?.setLeft(null) : lastNode?.setRight(null);
-                this.sizeTree--;
 
             } else if (leftNode === null && rightNode !== null) {
                 let leftLastNode = lastNode?.getLeft();
                 (leftLastNode === node) ? lastNode?.setLeft(rightNode) : lastNode?.setRight(rightNode);
-                this.sizeTree--;
 
             } else if (leftNode !== null && rightNode === null) {
                 let leftLastNode = lastNode?.getLeft();
                 (leftLastNode === node) ? lastNode?.setLeft(leftNode) : lastNode?.setRight(leftNode);
-                this.sizeTree--;
 
             } else {
-                let minRight = this.min(rightNode);
+                let minRight = this.min(rightNode)
+                if (minRight === null) return null;
                 let keyMinRight = minRight?.getKey();
                 let valueMinRight = minRight?.getValue();
-                this.delete(keyMinRight, node, lastNode, );
+                this.delete(keyMinRight, node, lastNode,);
                 node.setKey(keyMinRight);
                 node.setValue(valueMinRight);
-                this.sizeTree--;
 
             };
 
         } else {
             this.delete(key, (thisKey >= key) ? leftNode : rightNode, node);
         };
+        this.sizeTree--;
         return node;
     };
 
@@ -104,13 +127,13 @@ export class TreeMap<K, V> implements Map<K, V> {
     };
 
     // Search for the maximum node in the tree starting from the specified node
-    public max(node: Node | null = this.origin): Node | null {
+    public max(node: Node<K, V> | null = this.origin): Node<K, V> | null {
         if (node === null) return null;
         let rightNode = node.getRight();
         return rightNode == null ? node : this.max(rightNode);
     };
     // Search for the minimum node in the tree starting from the specified node
-    public min(node: Node | null = this.origin): Node | null {
+    public min(node: Node<K, V> | null = this.origin): Node<K, V> | null {
         if (node === null) return null;
         let leftNode = node.getLeft();
         return leftNode == null ? node : this.min(leftNode);

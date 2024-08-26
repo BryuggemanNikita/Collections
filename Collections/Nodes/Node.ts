@@ -1,49 +1,49 @@
 // Node for BinaryTree, TreeMap
-export class Node {
-    private key;
-    private value;
-    private left: Node | null = null;
-    private right: Node | null = null;
-    
-    constructor(key, value) {
+export class Node<K, V> {
+    private key: K;
+    private value: V;
+    private left: Node<K, V> | null = null;
+    private right: Node<K, V> | null = null;
+
+    constructor(key: K, value: V) {
         this.key = key;
         this.value = value;
     };
 
-    public getKey() {
+    public getKey(): K {
         return this.key;
     };
 
-    public getValue() {
+    public getValue(): V {
         return this.value;
     };
 
-    public getLeft(): Node | null {
+    public getLeft(): Node<K, V> | null {
         return this.left;
     };
 
-    public getRight(): Node | null {
+    public getRight(): Node<K, V> | null {
         return this.right;
     };
 
-    public setLeft(left: Node|null): void {
+    public setLeft(left: Node<K, V> | null): void {
         this.left = left;
     };
 
-    public setRight(right: Node|null): void {
+    public setRight(right: Node<K, V> | null): void {
         this.right = right;
     };
 
-    public setKey(key){
+    public setKey(key: K): void {
         this.key = key;
     };
 
-    public setValue(value){
+    public setValue(value: V): void {
         this.value = value;
     };
 
-    public toString():string{
-        return `${this.key.toString()}${this.value.toString()}${(this.left !== null) ? this.left.toString() : "null"}${
-            (this.right !== null) ? this.right.toString() : "null"}Node`
+    public toString(): string {
+        return `${(this.key?.toString())}${this.value?.toString()}${(this.left !== null) ? this.left.toString() : "null"}${(this.right !== null) ? this.right.toString() : "null"}Node`
     };
 };
+// .toString()
