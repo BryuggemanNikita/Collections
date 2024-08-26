@@ -4,7 +4,6 @@ import { HashMap } from "./HashMap";
 
 let hmap = new HashMap(10);
 
-hmap.set("Никита", 18);
 hmap.set("Настя", 18);
 hmap.set("Кирилл", 10);
 hmap.set("Петя", 8);

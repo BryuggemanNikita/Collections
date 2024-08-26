@@ -4,7 +4,7 @@ import { Node } from "../../Nodes/Node";
 export class BinaryTree {
     private origin: Node | null;
 
-    constructor(originKey: number, originValue) {
+    constructor(originKey?: number, originValue?) {
         this.origin = new Node(originKey, originValue);
     };
 
@@ -17,6 +17,7 @@ export class BinaryTree {
     public insert(key: number, value): void {
         if (this.origin == null) {
             this.origin = new Node(key, value);
+            return;
         };
         WorkerBinaryTree.insert(this.origin, key, value);
     };

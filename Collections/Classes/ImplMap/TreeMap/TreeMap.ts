@@ -116,13 +116,3 @@ export class TreeMap<K, V> implements Map<K, V> {
         return leftNode == null ? node : this.min(leftNode);
     };
 };
-
-// let tree = new TreeMap<number, string>();
-// tree.set(12, "Nastya");
-// tree.set(52, "Nikita");
-// tree.set(16, "Efpatyi");
-// tree.set(69, "happy");
-// tree.set(5, "akaki");
-
-// console.log(tree);
-
