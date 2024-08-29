@@ -33,7 +33,8 @@ export class ArrayMap<K, V> implements Map<K, V> {
     public delete(key: K) {
         let arr: K[] = this.arrMap.map((e) => e.key);
         let elIndex = arr.indexOf(key);
-        this.arrMap.splice(elIndex, 1);
+        let thArr = this.arrMap;
+        this.arrMap = thArr.filter(e => e !== thArr[elIndex]);
     };
 
     // Removing an element from the ArrayMap for index \ Удаление элемента из массива по индексу
@@ -43,7 +44,8 @@ export class ArrayMap<K, V> implements Map<K, V> {
             return this.arrMap.pop();
         };
         let el: obj<K, V> = this.arrMap[ind];
-        this.arrMap.splice(ind, 1);
+        let arr = this.arrMap;
+        this.arrMap = arr.filter(e => e !== arr[ind]);
         return el;
     };
 
