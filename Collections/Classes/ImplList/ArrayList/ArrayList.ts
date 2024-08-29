@@ -39,11 +39,12 @@ export class ArrayList<T> implements List<T> {
 
     // Deleting an element \ Удаление элемента
     public pop(ind: number | null = null): T | undefined {
+        let arr = this.array;
         if (ind === null) {
-            return this.array.pop();
+            return arr.pop();
         };
         let el = this.array[ind];
-        this.array.splice(ind, 1);
+        this.array = arr.filter(e => e !== arr[ind]);
         return el;
     };
 
@@ -55,8 +56,8 @@ export class ArrayList<T> implements List<T> {
 
     // Deleting an element by value \ Удаление элемента по значения
     public remove(value: T): void {
-        let indValue = this.array.indexOf(value);
-        this.array.splice(indValue, 1);
+        let arr = this.array;
+        this.array = arr.filter(e => e !== value);
     };
 
     // Reverse array
